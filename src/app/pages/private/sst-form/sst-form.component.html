@@ -1,0 +1,159 @@
+<!-- <div class="main-content fadeinleft animation-duration-1000">
+    <app-header></app-header>
+
+    <h1 class="form-title mb-5">Inducción SG-SST proveedores y crew</h1>
+
+    <form [formGroup]="form" autocomplete="off">
+        <div class="content-row mb-3">
+            <p class="info-section">A continuación seleccione los temas vistos durante la inducción o reinducción en Seguridad y Salud en el Trabajo</p>
+            <div class="content-col flex m_8 ">
+                <label>Generalidades de Seguridad y Salud en el Trabajo. <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div class="input-choose-option">
+                    <label><input name="security_general" type="radio" value="1" formControlName="security_general"> Si</label>
+                    <label><input name="security_general" type="radio" value="0" formControlName="security_general"> No</label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'security_general'}"></ng-container>
+            </div>
+            <div class="content-col flex m_8 ">
+                <label>Requisitos que en SST deben cumplir los proveedores y contratistas. <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div class="input-choose-option">
+                    <label><input name="sst_requirementes" type="radio" value="1" formControlName="sst_requirementes"> Si</label>
+                    <label><input name="sst_requirementes" type="radio" value="0" formControlName="sst_requirementes"> No</label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'sst_requirementes'}"></ng-container>
+            </div>
+            <div class="content-col flex m_8 ">
+                <label>Prevención & atención de emergencias. <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div class="input-choose-option">
+                    <label><input name="emergency_prevention" type="radio" value="1" formControlName="emergency_prevention"> Si</label>
+                    <label><input name="emergency_prevention" type="radio" value="0" formControlName="emergency_prevention"> No</label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'emergency_prevention'}"></ng-container>
+            </div>
+            <div class="content-col flex m_8 ">
+                <label>Prevención de Incidentes & accidentes. <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div class="input-choose-option">
+                    <label><input name="prevention_accidents" type="radio" value="1" formControlName="prevention_accidents"> Si</label>
+                    <label><input name="prevention_accidents" type="radio" value="0" formControlName="prevention_accidents"> No</label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'prevention_accidents'}"></ng-container>
+            </div>
+        </div>
+        <div class="content-row mb-3">
+            <div class="content-col m_8 ">
+                <label class="info-section">1. ¿Cuál de los siguientes casos No sería catalogado como accidente de trabajo? <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div>
+                    <label class="flex">
+                        <input name="no_work_accident" type="radio" value="1" formControlName="no_work_accident" class="mr-2">
+                        A. El que ocurre durante la ejecución de la labor contratada.
+                    </label>
+                    <label class="flex">
+                        <input name="no_work_accident" type="radio" value="0" formControlName="no_work_accident" class="mr-2">
+                        B. El que ocurre fuera de la jornada de trabajo.
+                    </label>
+                    <label class="flex">
+                        <input name="no_work_accident" type="radio" value="0" formControlName="no_work_accident" class="mr-2">
+                        C. El que  ocurre  durante un desplazamiento de trabajo cuando Dynamo  suministra el transporte.
+                    </label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'no_work_accident'}"></ng-container>
+            </div>
+        </div>
+        <div class="content-row mb-3">
+            <div class="content-col m_8 ">
+                <label class="info-section">2. Seleccione los peligros a los que se encuentra expuesto durante el desarrollo de su labor contratada: <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div>
+                    <label class="flex">
+                        <input class="mr-2" name="work_dangers" type="radio" value="1" formControlName="work_dangers">
+                        A. Biológico; Físico; Químico; Transporte
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="work_dangers" type="radio" value="0" formControlName="work_dangers">
+                        B. Fenómenos naturales; Quimico; Condiciones de seguridad; Psicosocial; Físico; Biológico; Biomecánico
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="work_dangers" type="radio" value="0" formControlName="work_dangers">
+                        C. Condiciones de seguridad; Biológico; Biomecánico; Psicologico; Transporte; Fenómenos naturales
+                    </label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'work_dangers'}"></ng-container>
+            </div>
+        </div>
+        <div class="content-row mb-3">
+            <div class="content-col m_8 ">
+                <label class="info-section">3. Un acto inseguro es una omisión del contratista que origina un riesgo contra su seguridad, por ejemplo, no hacer uso del cinturón de seguridad. Esta afirmación es: <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div>
+                    <label class="flex">
+                        <input class="mr-2" name="unsafe_act" type="radio" value="1" formControlName="unsafe_act">
+                        A. Falsa
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="unsafe_act" type="radio" value="0" formControlName="unsafe_act">
+                        B. Verdadera
+                    </label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'unsafe_act'}"></ng-container>
+            </div>
+        </div>
+        <div class="content-row mb-3">
+            <div class="content-col m_8 ">
+                <label class="info-section">4. Seleccione las responsabilidades que en SST se deben cumplir desde su posición: <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div>
+                    <label class="flex">
+                        <input class="mr-2" name="sst_responsabilities" type="radio" value="1" formControlName="sst_responsabilities">
+                        A. Procurar el cuidado integral de su salud.
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="sst_responsabilities" type="radio" value="0" formControlName="sst_responsabilities">
+                        B. Contar y usar correctamente los elementos de protección personal.
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="sst_responsabilities" type="radio" value="0" formControlName="sst_responsabilities">
+                        C. Informar oportunamente la ocurrencia de Incidentes & Accidentes de Trabajo.
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="sst_responsabilities" type="radio" value="0" formControlName="sst_responsabilities">
+                        D. Participar en las actividades de promoción y prevención en SST
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="sst_responsabilities" type="radio" value="0" formControlName="sst_responsabilities">
+                        E. Todas las anteriores.
+                    </label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'sst_responsabilities'}"></ng-container>
+            </div>
+        </div>
+        <div class="content-row mb-3">
+            <div class="content-col m_8 ">
+                <label class="info-section">5. Qué debe hacer cuando le ocurra un accidente de trabajo: <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <div>
+                    <label class="flex">
+                        <input class="mr-2" name="when_is_work_accident" type="radio" value="1" formControlName="when_is_work_accident">
+                        A. Informar a la cabeza de mi departamento y al departamento de SST.
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="when_is_work_accident" type="radio" value="0" formControlName="when_is_work_accident">
+                        B. Recibir la atención de primeros auxilios que da el equipo de SST
+                    </label>
+                    <label class="flex">
+                        <input class="mr-2" name="when_is_work_accident" type="radio" value="0" formControlName="when_is_work_accident">
+                        C. A y B son correctos.
+                    </label>
+                </div>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'when_is_work_accident'}"></ng-container>
+            </div>
+        </div>
+        <div class="content-buttons">
+            <button [disabled]="form.invalid" (click)="submit()" type="submit">ENVIAR FORMULARIO</button>
+        </div>
+    </form>
+</div> -->

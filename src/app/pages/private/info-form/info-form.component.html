@@ -1,0 +1,71 @@
+<div class="main-content fadeinleft animation-duration-1000">
+    <app-header></app-header>
+    
+    <h1 class="form-title">Formulario de inducción</h1>
+    <div class="section-title">
+        Datos del proveedor
+    </div>
+
+    <form [formGroup]="parentForm" autocomplete="off">
+        <div class="content-row">
+            <div class="content-col m_8">
+                <label>Nombre completo <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="text" name="name" formControlName="name">
+                <small class="text-red" *ngIf="hasErrors(getControl('name'))">{{ getErrorLabel(getControl('name')) }}</small>
+            </div>
+            <div class="content-col m_8">
+                <label>Número de documento de identificación <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="text" name="document_number" formControlName="document_number">
+                <small class="text-red" *ngIf="hasErrors(getControl('document_number'))">{{ getErrorLabel(getControl('document_number')) }}</small>
+            </div>
+            <div class="content-col m_4">
+                <label>Email <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="email" name="email" formControlName="email">
+                <small class="text-red" *ngIf="hasErrors(getControl('email'))">{{ getErrorLabel(getControl('email')) }}</small>
+            </div>
+            <div class="content-col m_4">
+                <label>Teléfono <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="text" name="phone" pattern formControlName="phone">
+                <small class="text-red" *ngIf="hasErrors(getControl('phone'))">{{ getErrorLabel(getControl('phone')) }}</small>
+            </div>
+            <div class="content-col m_8">
+                <label>Nombre del proyecto <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="text" name="project_name" formControlName="project_name">
+                <small class="text-red" *ngIf="hasErrors(getControl('project_name'))">{{ getErrorLabel(getControl('project_name')) }}</small>
+            </div>
+            <div class="content-col m_8">
+                <label>Posición en el proyecto <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="text" name="project_position" pattern formControlName="project_position">
+                <small class="text-red" *ngIf="hasErrors(getControl('project_position'))">{{ getErrorLabel(getControl('project_position')) }}</small>
+            </div>
+            <div class="content-col m_8">
+                <label>Empresa para la que trabaja <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="text" name="company" formControlName="company">
+                <small class="text-red" *ngIf="hasErrors(getControl('company'))">{{ getErrorLabel(getControl('company')) }}</small>
+            </div>
+            <div class="content-col m_8">
+                <label>Fecha Inducción en  SG-SST <span class="text-red">*</span></label>
+                <p class="lbl-eng"></p>
+                <input type="date" name="date" formControlName="date">
+                <small class="text-red" *ngIf="hasErrors(getControl('date'))">{{ getErrorLabel(getControl('date')) }}</small>
+            </div>
+            <!-- <div class="content-col m_8">
+                <p class="small-p">
+                    <input type="checkbox" class="checkbox-p" name="autorizacion_datos">  He leído y acepto la Política de Tratamiento de Datos Personales (LA PRODUCTORA está comprometida con el Tratamiento legal, lícito, confidencial y seguro de sus datos personales. Consulte la Política de Tratamiento de Datos Personales en: www.dynamo.net, donde puede conocer sus derechos, así como la forma de ejercerlos. Atenderemos todas las observaciones, consultas o reclamos en el canal habilitado, contenido en la Política de Tratamiento de Información de DYNAMO)
+                    <a href="https://dynamo.net/es/politicas-de-tratamiento-de-datos-personales/" target="_blank">https://dynamo.net/es/politicas-de-tratamiento-de-datos-personales/</a>
+                </p>
+                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'autorizacion_datos'}"></ng-container>
+            </div> -->
+        </div>
+        <div class="content-buttons">
+            <button (click)="submit()" type="submit">SIGUIENTE</button>
+        </div>
+    </form>
+</div>
