@@ -1,9 +1,9 @@
-<!-- <div class="main-content fadeinleft animation-duration-1000">
+<div class="main-content fadeinleft animation-duration-1000">
     <app-header></app-header>
 
     <h1 class="form-title">Inducción Compliance Proyectos</h1>
 
-    <form [formGroup]="form" autocomplete="off">
+    <form [formGroup]="parentForm" autocomplete="off">
         <div class="content-row mb-3">
             <div class="content-col m_8 ">
                 <label class="info-section">1. Hablamos de conflictos de interés cuando: <span class="text-red">*</span></label>
@@ -14,15 +14,15 @@
                         A. Alguien ofrece dinero para obtener lo que quiere.
                     </label>
                     <label class="flex">
-                        <input name="conflicts" type="radio" value="0" formControlName="conflicts" class="mr-2">
+                        <input name="conflicts" type="radio" value="2" formControlName="conflicts" class="mr-2">
                         B. Alguien antepone intereses personales para la toma de decisiones.
                     </label>
                     <label class="flex">
-                        <input name="conflicts" type="radio" value="0" formControlName="conflicts" class="mr-2">
+                        <input name="conflicts" type="radio" value="3" formControlName="conflicts" class="mr-2">
                         C. A y B son correctas
                     </label>
                 </div>
-                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'conflicts'}"></ng-container>
+                <small class="text-red" *ngIf="hasErrors(getControl('conflicts'))">{{ getErrorLabel(getControl('conflicts')) }}</small>
             </div>
         </div>
         <div class="content-row mb-3">
@@ -35,15 +35,15 @@
                         A. Adquirir, resguardar, invertir, transportar, transformar, custodiar o administrar bienes que tengan un origen ilícito.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="asset_laundering" type="radio" value="0" formControlName="asset_laundering">
+                        <input class="mr-2" name="asset_laundering" type="radio" value="2" formControlName="asset_laundering">
                         B. Adquirir, resguardar e  invertir bienes de origen ilícito
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="asset_laundering" type="radio" value="0" formControlName="asset_laundering">
+                        <input class="mr-2" name="asset_laundering" type="radio" value="3" formControlName="asset_laundering">
                         C. Cualquier forma de acción económica, ayuda o mediación que proporcione apoyo financiero a las actividades de elementos o grupos terroristas.
                     </label>
                 </div>
-                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'asset_laundering'}"></ng-container>
+                <small class="text-red" *ngIf="hasErrors(getControl('asset_laundering'))">{{ getErrorLabel(getControl('asset_laundering')) }}</small>
             </div>
         </div>
         <div class="content-row mb-3">
@@ -56,15 +56,15 @@
                         A. Se presenta abuso de poder para obtener un beneficio propio.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="extortion" type="radio" value="0" formControlName="extortion">
+                        <input class="mr-2" name="extortion" type="radio" value="2" formControlName="extortion">
                         B. Se Amenaza o intimida para exigir algo.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="extortion" type="radio" value="0" formControlName="extortion">
+                        <input class="mr-2" name="extortion" type="radio" value="3" formControlName="extortion">
                         C. Ninguna es correcta.
                     </label>
                 </div>
-                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'extortion'}"></ng-container>
+                <small class="text-red" *ngIf="hasErrors(getControl('extortion'))">{{ getErrorLabel(getControl('extortion')) }}</small>
             </div>
         </div>
         <div class="content-row mb-3">
@@ -77,15 +77,15 @@
                         A. Se abusa del poder para obtener un beneficio propio.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="bribery" type="radio" value="0" formControlName="bribery">
+                        <input class="mr-2" name="bribery" type="radio" value="2" formControlName="bribery">
                         B. Se ofrece dinero para obtener algo.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="bribery" type="radio" value="0" formControlName="bribery">
+                        <input class="mr-2" name="bribery" type="radio" value="3" formControlName="bribery">
                         C. A y B son correctas
                     </label>
                 </div>
-                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'bribery'}"></ng-container>
+                <small class="text-red" *ngIf="hasErrors(getControl('bribery'))">{{ getErrorLabel(getControl('bribery')) }}</small>
             </div>
         </div>
         <div class="content-row mb-3">
@@ -98,23 +98,23 @@
                         A. Recolección, divulgación, transferencia.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="data_processing" type="radio" value="0" formControlName="data_processing">
+                        <input class="mr-2" name="data_processing" type="radio" value="2" formControlName="data_processing">
                         B. Uso, recolección, supresión, almacenamiento y circulación.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="data_processing" type="radio" value="0" formControlName="data_processing">
+                        <input class="mr-2" name="data_processing" type="radio" value="3" formControlName="data_processing">
                         C. Privacidad y reserva.
                     </label>
                     <label class="flex">
-                        <input class="mr-2" name="data_processing" type="radio" value="0" formControlName="data_processing">
+                        <input class="mr-2" name="data_processing" type="radio" value="4" formControlName="data_processing">
                         D. Confidencialidad, uso y recolección.
                     </label>
                 </div>
-                <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'data_processing'}"></ng-container>
+                <small class="text-red" *ngIf="hasErrors(getControl('data_processing'))">{{ getErrorLabel(getControl('data_processing')) }}</small>
             </div>
         </div>
         <div class="content-buttons">
-            <button [disabled]="form.invalid" (click)="submit()" type="submit">ENVIAR FORMULARIO</button>
+            <button (click)="submit()" type="submit">ENVIAR FORMULARIO</button>
         </div>
     </form>
-</div> -->
+</div>
