@@ -7,7 +7,7 @@
     </div>
 
     <form [formGroup]="parentForm" autocomplete="off">
-        <div class="content-row">
+        <div class="content-row mb-4">
             <div class="content-col m_8">
                 <label>Nombre completo <span class="text-red">*</span></label>
                 <p class="lbl-eng"></p>
@@ -64,7 +64,7 @@
                 <ng-container *ngTemplateOutlet="errorTemplate; context:{'control': 'autorizacion_datos'}"></ng-container>
             </div> -->
         </div>
-        <div class="content-buttons">
+        <div class="flex justify-content-end">
             <button (click)="submit()" type="submit">SIGUIENTE</button>
         </div>
     </form>

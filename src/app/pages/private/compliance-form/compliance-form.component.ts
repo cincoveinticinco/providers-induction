@@ -29,6 +29,8 @@ export class ComplianceFormComponent extends BaseForm {
         this.parentForm.markAllAsTouched();
         return;
       }
+      this.localStorageService.setInfo(this.parentForm.getRawValue());
+      this.router.navigate(['sst-form']);
     }
 
 }

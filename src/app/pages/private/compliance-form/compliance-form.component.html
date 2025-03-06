@@ -2,6 +2,8 @@
     <app-header></app-header>
 
     <h1 class="form-title">Inducción Compliance Proyectos</h1>
+    <p>A continuación se presenta la inducción en temas de Compliance que <b>DYNAMO PRODUCCIONES S.A.S</b>, y sus empresas subsidiarias, asociadas, y/o relacionadas, proporciona a todos sus aliados estratégicos. <br>
+        Tiene validez durante la vigencia del contrato suscrito y es un requisito fundamental para poder realizar las labores en los proyectos y áreas de Dynamo.</p>
 
     <form [formGroup]="parentForm" autocomplete="off">
         <div class="content-row mb-3">
@@ -113,8 +115,9 @@
                 <small class="text-red" *ngIf="hasErrors(getControl('data_processing'))">{{ getErrorLabel(getControl('data_processing')) }}</small>
             </div>
         </div>
-        <div class="content-buttons">
-            <button (click)="submit()" type="submit">ENVIAR FORMULARIO</button>
+        <div class="flex justify-content-between">
+            <button (click)="navigateTo('info-form')" type="submit">ATRAS</button>
+            <button (click)="submit()" type="submit">SIGUIENTE</button>
         </div>
     </form>
 </div>

@@ -1,9 +1,12 @@
 <div class="main-content fadeinleft animation-duration-1000">
     <app-header></app-header>
 
-    <h1 class="form-title mb-5">Inducción SG-SST proveedores y crew</h1>
+    <h1 class="form-title">Inducción SG-SST proveedores y crew</h1>
+    <p>A continuación se presenta la inducción en Seguridad y Salud en el Trabajo que <b>DYNAMO PRODUCCIONES S.A.S</b>, y sus empresas subsidiarias, asociadas, y/o relacionadas, proporciona a todos sus aliados estratégicos que permite el desarrollo de las actividades de una manera segura. <br> 
+        Tiene validez durante la vigencia del contrato suscrito, al vencerse se debe realizar la reinducción en SST ya que este documento es un requisito fundamental para poder realizar las labores en los proyectos y áreas de Dynamo.</p>
 
-    <form [formGroup]="parentForm" autocomplete="off">
+
+    <form class="mt-5" [formGroup]="parentForm" autocomplete="off">
         <div class="content-row mb-3">
             <p class="info-section">A continuación seleccione los temas vistos durante la inducción o reinducción en Seguridad y Salud en el Trabajo</p>
             <div class="content-col m_8 ">
@@ -170,7 +173,8 @@
 
             </div>
         </div>
-        <div class="content-buttons">
+        <div class="flex justify-content-between">
+            <button (click)="navigateTo('compliance-form')" type="submit">ATRAS</button>
             <button (click)="submit()" type="submit">ENVIAR FORMULARIO</button>
         </div>
     </form>

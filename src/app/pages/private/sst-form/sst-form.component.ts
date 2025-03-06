@@ -33,6 +33,7 @@ export class SstFormComponent extends BaseForm {
         this.parentForm.markAllAsTouched();
         return;
       }
+      this.localStorageService.setInfo(this.parentForm.getRawValue());
     }
 
 }

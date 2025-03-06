@@ -198,17 +198,6 @@ p.lbl-eng {
     width: auto !important;
 }
 
-.content-buttons {
-    display: flex;
-    justify-content: center;
-    padding-top: 1rem;
-    gap: 10px;
-
-    button, .button{
-        margin: 0 !important;
-    }
-}
-
 button:not(.mat-mdc-snack-bar-action), .button:not(.mat-mdc-snack-bar-action) {
     background-color: var(--primary-color);
     text-transform: uppercase;
