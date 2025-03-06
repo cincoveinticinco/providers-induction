@@ -8,6 +8,7 @@ import { BaseForm } from '../../../bases/form.base';
 @Component({
   selector: 'app-info-form',
   imports: [MaterialModule, HeaderComponent, ReactiveFormsModule, CommonModule],
+  standalone: true,
   templateUrl: './info-form.component.html',
   styleUrl: './info-form.component.scss'
 })

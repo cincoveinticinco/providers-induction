@@ -6,6 +6,7 @@ import { BaseForm } from '../../../bases/form.base';
 
 @Component({
   selector: 'app-sst-form',
+  standalone: true,
   imports: [HeaderComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './sst-form.component.html',
   styleUrl: './sst-form.component.scss'

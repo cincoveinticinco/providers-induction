@@ -7,6 +7,7 @@ import { BaseForm } from '../../../bases/form.base';
 @Component({
   selector: 'app-compliance-form',
   imports: [HeaderComponent, ReactiveFormsModule, CommonModule],
+  standalone: true,
   templateUrl: './compliance-form.component.html',
   styleUrl: './compliance-form.component.scss'
 })
