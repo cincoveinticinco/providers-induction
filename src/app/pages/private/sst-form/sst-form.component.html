@@ -8,7 +8,8 @@
     <a href="https://www.youtube.com/watch?v=cmx1FREu-GA&t=1s" target="_blank">Ver Video Inducción Sistema de Gestión de Seguridad y Salud en el Trabajo:</a>
 
     <form class="mt-5" [formGroup]="parentForm" autocomplete="off">
-        <div formArrayName="questions_yes_not" class="content-row mb-3">
+        <!-- Yes not -->
+        <div formArrayName="evaluation_sst_yes_not" class="content-row mb-3">
             <p class="info-section">A continuación seleccione los temas vistos durante la inducción o reinducción en Seguridad y Salud en el Trabajo</p>
             <div *ngFor="let evaluation of evaluation_sst_yes_not$ | async; let i = index" class="content-col m_8 ">
                 <div class="flex">
@@ -17,16 +18,16 @@
                     <div class="input-choose-option">
                         <label *ngFor="let option of evaluation.options; let j = index">
                             <input name="{{i}}" type="radio" [value]="option.id" formControlName="{{i}}">
-                            Si
+                            {{ option.option }}
                         </label>
                     </div>
                 </div>
                 <div class="flex justify-content-end">
-                    <small class="text-red" *ngIf="hasErrors(getFormArray('questions_yes_not').controls[i])">{{ getErrorLabel(getFormArray('questions_yes_not').controls[i]) }}</small>
+                    <small class="text-red" *ngIf="hasErrors(getFormArray('evaluation_sst_yes_not').controls[i])">{{ getErrorLabel(getFormArray('evaluation_sst_yes_not').controls[i]) }}</small>
                 </div>
             </div>
         </div>
-        <div formArrayName="questions">
+        <div formArrayName="evaluation_sst">
             <div *ngFor="let evaluation of evaluation_sst$ | async; let i = index" class="content-row mb-3">
                 <div class="content-col m_8 ">
                     <label class="info-section">{{i + 1}}. {{ evaluation.question }} <span class="text-red">*</span></label>
@@ -37,7 +38,7 @@
                             {{ passNumberToLetter(j) }}. {{ option.option }}
                         </label>
                     </div>
-                    <small class="text-red" *ngIf="hasErrors(getFormArray('questions').controls[i])">{{ getErrorLabel(getFormArray('questions').controls[i]) }}</small>
+                    <small class="text-red" *ngIf="hasErrors(getFormArray('evaluation_sst').controls[i])">{{ getErrorLabel(getFormArray('evaluation_sst').controls[i]) }}</small>
                 </div>
             </div>
         </div>

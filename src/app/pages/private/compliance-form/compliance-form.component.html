@@ -8,7 +8,7 @@
     <a href="https://dynamodevelopment.slides.com/dynamoproducciones/bento/fullscreen?token=erwCKzu_" target="_blank">VIDEO COMPLIANCE</a>
 
     <form [formGroup]="parentForm" autocomplete="off">
-        <div formArrayName="questions">
+        <div formArrayName="evaluation_compliances">
             <div *ngFor="let evaluation of evaluation_compliances$ | async; let i = index" class="content-row mb-3">
                 <div class="content-col m_8 ">
                     <label class="info-section">{{i + 1}}. {{ evaluation.question }} <span class="text-red">*</span></label>
@@ -19,7 +19,7 @@
                             {{ passNumberToLetter(j) }}. {{ option.option }}
                         </label>
                     </div>
-                    <small class="text-red" *ngIf="hasErrors(getFormArray('questions').controls[i])">{{ getErrorLabel(getFormArray('questions').controls[i]) }}</small>
+                    <small class="text-red" *ngIf="hasErrors(getFormArray('evaluation_compliances').controls[i])">{{ getErrorLabel(getFormArray('evaluation_compliances').controls[i]) }}</small>
                 </div>
             </div>
         </div>

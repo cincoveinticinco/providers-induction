@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseForm } from '../../../bases/form.base';
 import { loadVendor } from '../../../state/actions/vendor.actions';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { selectDataVendorEvaluationSST, selectDataVendorEvaluationSSTYESNOT } from '../../../state/selectors/vendor.selectors';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { VendorService } from '../../../services';
 
 @Component({
   selector: 'app-sst-form',
@@ -17,13 +18,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class SstFormComponent extends BaseForm {
 
+    vendorService = inject(VendorService);
+
     evaluation_sst_yes_not$: Observable<any> = new Observable();
     evaluation_sst$: Observable<any> = new Observable();
   
     constructor() {
       const form = new FormGroup({
-        questions_yes_not: new FormArray([]),
-        questions: new FormArray([])
+        evaluation_sst_yes_not: new FormArray([]),
+        evaluation_sst: new FormArray([])
       });
       super(form);
     }
@@ -43,9 +46,8 @@ export class SstFormComponent extends BaseForm {
       this.store.select(selectDataVendorEvaluationSSTYESNOT)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(evaluations => {
-          console.log(evaluations)
           evaluations?.forEach(() => {
-            this.getFormArray('questions_yes_not').push(this.createControl());
+            this.getFormArray('evaluation_sst_yes_not').push(this.createControl());
           });
         });
     }
@@ -56,18 +58,18 @@ export class SstFormComponent extends BaseForm {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(evaluations => {
           evaluations?.forEach(() => {
-            this.getFormArray('questions').push(this.createControl());
+            this.getFormArray('evaluation_sst').push(this.createControl());
           });
         });
     }
   
-    submit() {
-      console.log(this.parentForm.getRawValue());
+    async submit() {
       if (this.parentForm.invalid) {
         this.parentForm.markAllAsTouched();
         return;
       }
       this.localStorageService.setInfo(this.parentForm.getRawValue());
+      await lastValueFrom(this.vendorService.save_response_evaluation(this.localStorageService.getInfo()));
     }
 
 }

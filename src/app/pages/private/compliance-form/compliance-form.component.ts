@@ -21,7 +21,7 @@ export class ComplianceFormComponent extends BaseForm {
   
     constructor() {
       const form = new FormGroup({
-        questions: new FormArray([])
+        evaluation_compliances: new FormArray([])
       });
       super(form);
     }
@@ -36,16 +36,13 @@ export class ComplianceFormComponent extends BaseForm {
       this.store.select(selectDataVendorEvaluationCompliance)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(evaluations => {
-          console.log(evaluations)
           evaluations?.forEach(() => {
-            this.getFormArray('questions').push(this.createControl());
+            this.getFormArray('evaluation_compliances').push(this.createControl());
           });
         });
     }
   
     submit() {
-      console.log(this.parentForm.getRawValue());
-      console.log(this.getFormArray('questions').controls[0]);
       if (this.parentForm.invalid) {
         this.parentForm.markAllAsTouched();
         return;
