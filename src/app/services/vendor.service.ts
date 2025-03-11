@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
-import { ApiBase } from '../bases/api.base';
+import { Injectable, Injector } from '@angular/core';
+import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VendorService extends ApiBase {
+export class VendorService extends ApiService {
 
-  constructor() {
-    super();
+  constructor(
+    injector: Injector
+  ) {
+    super(injector);
   }
 
-  getEvaluationVendor() {
-    return this.get(`${this.environment.apiUrl}finance_manager/getEvaluationVendor`, {});
+  getEvaluationVendor(): Observable<any> {
+    return this.get(`finance_manager/getEvaluationVendor`, {});
   }
 
 }
