@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { BaseForm } from '../../../bases/form.base';
 import { selectDataVendorInfo } from '../../../state/selectors/vendor.selectors';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Store } from '@ngrx/store';
 import { loadVendor } from '../../../state/actions/vendor.actions';
 
 @Component({

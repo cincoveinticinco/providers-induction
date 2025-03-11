@@ -1,7 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
 import { LocalStorageService } from '../../services';
-import { Store } from '@ngrx/store';
-import { loadVendor } from '../../state/actions/vendor.actions';
 import { Router } from '@angular/router';
 
 @Component({

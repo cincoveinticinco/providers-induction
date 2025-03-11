@@ -19,36 +19,40 @@ export class ComplianceFormComponent extends BaseForm {
 
   evaluation_compliances$: Observable<any> = new Observable();
   
-    constructor() {
-      const form = new FormGroup({
-        evaluation_compliances: new FormArray([])
-      });
-      super(form);
-    }
+  constructor() {
+    const form = new FormGroup({
+      evaluation_compliances: new FormArray([])
+    });
+    super(form);
+  }
 
-    ngOnInit() {
-      this.init();
-    }
-    
-    init() {
-      this.store.dispatch(loadVendor());
-      this.evaluation_compliances$ = this.store.select(selectDataVendorEvaluationCompliance);
-      this.store.select(selectDataVendorEvaluationCompliance)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe(evaluations => {
+  ngOnInit() {
+    this.store.dispatch(loadVendor());
+    this.init();
+  }
+  
+  init() {
+    this.evaluation_compliances$ = this.store.select(selectDataVendorEvaluationCompliance);
+    this.evaluation_compliances$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(evaluations => {
+        if (this.getFormArray('evaluation_compliances').controls.length === 0 ) {
           evaluations?.forEach(() => {
             this.getFormArray('evaluation_compliances').push(this.createControl());
           });
-        });
+          console.log(this.parentForm)
+        }
+      });
+  }
+
+  submit() {
+    console.log(this.parentForm)
+    if (this.parentForm.invalid) {
+      this.parentForm.markAllAsTouched();
+      return;
     }
-  
-    submit() {
-      if (this.parentForm.invalid) {
-        this.parentForm.markAllAsTouched();
-        return;
-      }
-      this.localStorageService.setInfo(this.parentForm.getRawValue());
-      this.router.navigate(['sst-form']);
-    }
+    this.localStorageService.setInfo(this.parentForm.getRawValue());
+    this.router.navigate(['sst-form']);
+  }
 
 }

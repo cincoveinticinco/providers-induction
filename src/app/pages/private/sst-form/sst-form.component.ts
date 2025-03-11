@@ -46,9 +46,11 @@ export class SstFormComponent extends BaseForm {
       this.store.select(selectDataVendorEvaluationSSTYESNOT)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(evaluations => {
-          evaluations?.forEach(() => {
-            this.getFormArray('evaluation_sst_yes_not').push(this.createControl());
-          });
+          if (this.getFormArray('evaluation_sst_yes_not').controls.length === 0 ) {
+            evaluations?.forEach(() => {
+              this.getFormArray('evaluation_sst_yes_not').push(this.createControl());
+            });
+          }
         });
     }
 
@@ -57,9 +59,11 @@ export class SstFormComponent extends BaseForm {
       this.store.select(selectDataVendorEvaluationSST)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(evaluations => {
-          evaluations?.forEach(() => {
-            this.getFormArray('evaluation_sst').push(this.createControl());
-          });
+          if (this.getFormArray('evaluation_sst').controls.length === 0 ) {
+            evaluations?.forEach(() => {
+              this.getFormArray('evaluation_sst').push(this.createControl());
+            });
+          }
         });
     }
   
