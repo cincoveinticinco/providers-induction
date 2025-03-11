@@ -23,5 +23,9 @@ export class ApiService {
   get<T>(path: string, options: { [param: string]: unknown } = {}): Observable<T> {
     return this.httpClient.get<T>(`${this.apiUrl}${path}`, options);
   }
+
+  post<T>(path: string, body: any, options: { [param: string]: unknown } = {}): Observable<T> {
+    return this.httpClient.post<T>(`${this.apiUrl}${path}`, body, options);
+  }
   
 }

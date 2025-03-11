@@ -54,12 +54,10 @@ export class InfoFormComponent extends BaseForm {
   }
 
   submit() {
-    console.log(this.parentForm.getRawValue());
     if (this.parentForm.invalid) {
       this.parentForm.markAllAsTouched();
       return;
     }
-    this.localStorageService.setInfo(this.parentForm.getRawValue());
     this.router.navigate(['compliance-form']);
   }
 

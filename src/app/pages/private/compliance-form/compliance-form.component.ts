@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../../components/header/header.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
+import { HeaderComponent } from '../../../components/header/header.component';
 import { BaseForm } from '../../../bases/form.base';
+import { loadVendor } from '../../../state/actions/vendor.actions';
+import { selectDataVendorEvaluationCompliance } from '../../../state/selectors/vendor.selectors';
 
 @Component({
   selector: 'app-compliance-form',
@@ -12,20 +16,36 @@ import { BaseForm } from '../../../bases/form.base';
   styleUrl: './compliance-form.component.scss'
 })
 export class ComplianceFormComponent extends BaseForm {
+
+  evaluation_compliances$: Observable<any> = new Observable();
   
     constructor() {
       const form = new FormGroup({
-        conflicts: new FormControl('', Validators.required),
-        asset_laundering: new FormControl('', Validators.required),
-        extortion: new FormControl('', Validators.required),
-        bribery: new FormControl('', Validators.required),
-        data_processing: new FormControl('', Validators.required)
+        questions: new FormArray([])
       });
       super(form);
+    }
+
+    ngOnInit() {
+      this.init();
+    }
+    
+    init() {
+      this.store.dispatch(loadVendor());
+      this.evaluation_compliances$ = this.store.select(selectDataVendorEvaluationCompliance);
+      this.store.select(selectDataVendorEvaluationCompliance)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(evaluations => {
+          console.log(evaluations)
+          evaluations?.forEach(() => {
+            this.getFormArray('questions').push(this.createControl());
+          });
+        });
     }
   
     submit() {
       console.log(this.parentForm.getRawValue());
+      console.log(this.getFormArray('questions').controls[0]);
       if (this.parentForm.invalid) {
         this.parentForm.markAllAsTouched();
         return;

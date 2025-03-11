@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup } from "@angular/forms"
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from "@angular/forms"
 import { FormErrorService, LocalStorageService } from "../services";
 import { DestroyRef, inject } from "@angular/core";
 import { Router } from "@angular/router";
@@ -21,6 +21,10 @@ export class BaseForm {
         return this.parentForm.get(name)!;
     }
 
+    getFormArray(name: string): FormArray {
+        return this.parentForm.get(name)! as FormArray;
+    }
+
     getErrorLabel(control: AbstractControl): string {
         return this.formErrorService.getFieldsErrors(control);
     }
@@ -31,6 +35,14 @@ export class BaseForm {
 
     navigateTo(url: string) {
         this.router.navigate([url]);
+    }
+
+    createControl(): FormControl {
+        return new FormControl('', Validators.required)
+    }
+
+    passNumberToLetter(i: number) {
+        return String.fromCharCode(65 + i);
     }
 
 }

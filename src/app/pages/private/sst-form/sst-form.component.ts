@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../../components/header/header.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseForm } from '../../../bases/form.base';
+import { loadVendor } from '../../../state/actions/vendor.actions';
+import { Observable } from 'rxjs';
+import { selectDataVendorEvaluationSST, selectDataVendorEvaluationSSTYESNOT } from '../../../state/selectors/vendor.selectors';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sst-form',
@@ -12,20 +16,49 @@ import { BaseForm } from '../../../bases/form.base';
   styleUrl: './sst-form.component.scss'
 })
 export class SstFormComponent extends BaseForm {
+
+    evaluation_sst_yes_not$: Observable<any> = new Observable();
+    evaluation_sst$: Observable<any> = new Observable();
   
     constructor() {
       const form = new FormGroup({
-        security_general: new FormControl('', Validators.required),
-        sst_requirementes: new FormControl('', Validators.required),
-        emergency_prevention: new FormControl('', Validators.required),
-        prevention_accidents: new FormControl('', Validators.required),
-        no_work_accident: new FormControl('', Validators.required),
-        work_dangers: new FormControl('', Validators.required),
-        unsafe_act: new FormControl('', Validators.required),
-        sst_responsabilities: new FormControl('', Validators.required),
-        when_is_work_accident: new FormControl('', Validators.required),
+        questions_yes_not: new FormArray([]),
+        questions: new FormArray([])
       });
       super(form);
+    }
+
+    ngOnInit() {
+      this.init();
+    }
+
+    init() {
+      this.store.dispatch(loadVendor());
+      this.getYesNotQuestions();
+      this.getNormalQuestions();
+    }
+
+    getYesNotQuestions() {
+      this.evaluation_sst_yes_not$ = this.store.select(selectDataVendorEvaluationSSTYESNOT);
+      this.store.select(selectDataVendorEvaluationSSTYESNOT)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(evaluations => {
+          console.log(evaluations)
+          evaluations?.forEach(() => {
+            this.getFormArray('questions_yes_not').push(this.createControl());
+          });
+        });
+    }
+
+    getNormalQuestions() {
+      this.evaluation_sst$ = this.store.select(selectDataVendorEvaluationSST);
+      this.store.select(selectDataVendorEvaluationSST)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(evaluations => {
+          evaluations?.forEach(() => {
+            this.getFormArray('questions').push(this.createControl());
+          });
+        });
     }
   
     submit() {
