@@ -4,6 +4,10 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseForm } from '../../../bases/form.base';
+import { selectDataVendorInfo } from '../../../state/selectors/vendor.selectors';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import { loadVendor } from '../../../state/actions/vendor.actions';
 
 @Component({
   selector: 'app-info-form',
@@ -26,6 +30,27 @@ export class InfoFormComponent extends BaseForm {
       date: new FormControl('', Validators.required),
     });
     super(form);
+  }
+
+  ngOnInit() {
+    this.store.dispatch(loadVendor());
+    this.setForm();
+  }
+
+  setForm() {
+    this.store.select(selectDataVendorInfo)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(vendor => {
+        this.getControl('name').patchValue(vendor?.name);
+        this.getControl('document_number').patchValue(vendor?.document);
+        this.getControl('email').patchValue(vendor?.email);
+        this.getControl('phone').patchValue(vendor?.telephone);
+        this.getControl('project_name').patchValue(vendor?.project_name);
+        this.getControl('project_position').patchValue(vendor?.position);
+        this.getControl('company').patchValue(vendor?.company_name);
+        this.getControl('date').patchValue(new Date().toISOString().substring(0, 10));
+        this.parentForm.disable();
+      });
   }
 
   submit() {

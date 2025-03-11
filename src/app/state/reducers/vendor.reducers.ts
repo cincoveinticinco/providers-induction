@@ -11,6 +11,7 @@ export const vendorReducer = createReducer(
         return { ...state, loading: false }
     }),
     on(loadedVendor, (state, {data}) => {
+        console.log(data)
         return { ...state, loading: true, data }
     })
 );

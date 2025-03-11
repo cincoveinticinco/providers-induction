@@ -2,29 +2,28 @@ import { Component, inject, Input } from '@angular/core';
 import { LocalStorageService } from '../../services';
 import { Store } from '@ngrx/store';
 import { loadVendor } from '../../state/actions/vendor.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
   localStorage = inject(LocalStorageService);
+  router = inject(Router);
 
   @Input() token: string = '';
 
-  constructor(
-    private store: Store<any>
-  ) {}
+  constructor() {}
 
   ngOnInit() {
     this.localStorage.setToken(this.token);
   }
 
   getVendorInfo() {
-    this.store.dispatch(loadVendor());
+    this.router.navigate(['info-form']);
   }
 
 }

@@ -21,7 +21,7 @@ export class LocalStorageService {
   }
 
   getToken() {
-    return JSON.parse(localStorage.getItem('token') || '');
+    return JSON.parse(localStorage.getItem('token')!);
   }
 
   clear() {

@@ -9,9 +9,15 @@ export const selectDataVendor = createSelector(
     (state: VendorState) => state.data
 );
 
+
 export const selectDataVendorLoading = createSelector(
     selectVendorsFeature,
     (state: VendorState) => state.loading
+);
+
+export const selectDataVendorInfo = createSelector(
+    selectDataVendor,
+    (data) => data.vendor
 );
 
 export const selectDataVendorEvaluationCompliance = createSelector(
