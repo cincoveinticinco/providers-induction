@@ -5,6 +5,7 @@ import { ComplianceFormComponent } from './pages/private/compliance-form/complia
 import { SstFormComponent } from './pages/private/sst-form/sst-form.component';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './guards/auth.guard';
+import { ThanksComponent } from './pages/thanks/thanks.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,10 @@ export const routes: Routes = [
     {
         path: 'home/:token',
         component: HomeComponent
+    },
+    {
+        path: 'thanks',
+        component: ThanksComponent
     },
     {
         path: '**',

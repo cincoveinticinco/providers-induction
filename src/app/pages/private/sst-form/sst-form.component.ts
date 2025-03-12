@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { BaseForm } from '../../../bases/form.base';
 import { loadVendor } from '../../../state/actions/vendor.actions';
 import { lastValueFrom, Observable } from 'rxjs';
-import { selectDataVendorEvaluationSST, selectDataVendorEvaluationSSTYESNOT } from '../../../state/selectors/vendor.selectors';
+import { selectDataVendorEvaluationSST, selectDataVendorEvaluationSSTYESNOT, selectDataVendorLinkSST } from '../../../state/selectors/vendor.selectors';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { VendorService } from '../../../services';
 
@@ -17,11 +17,9 @@ import { VendorService } from '../../../services';
   styleUrl: './sst-form.component.scss'
 })
 export class SstFormComponent extends BaseForm {
-
-    vendorService = inject(VendorService);
-
     evaluation_sst_yes_not$: Observable<any> = new Observable();
     evaluation_sst$: Observable<any> = new Observable();
+    link_video_sst$: Observable<any> = new Observable();
   
     constructor() {
       const form = new FormGroup({
@@ -37,6 +35,7 @@ export class SstFormComponent extends BaseForm {
 
     init() {
       this.store.dispatch(loadVendor());
+      this.link_video_sst$ = this.store.select(selectDataVendorLinkSST);
       this.getYesNotQuestions();
       this.getNormalQuestions();
     }
@@ -74,6 +73,7 @@ export class SstFormComponent extends BaseForm {
       }
       this.localStorageService.setInfo(this.parentForm.getRawValue());
       await lastValueFrom(this.vendorService.save_response_evaluation(this.localStorageService.getInfo()));
+      this.navigateTo('thanks');
     }
 
 }

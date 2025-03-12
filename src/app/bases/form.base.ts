@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from "@angular/forms"
-import { FormErrorService, LocalStorageService } from "../services";
+import { FormErrorService, LocalStorageService, VendorService } from "../services";
 import { DestroyRef, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -10,6 +10,7 @@ export class BaseForm {
     router = inject(Router);
     formErrorService = inject(FormErrorService);
     localStorageService = inject(LocalStorageService);
+    vendorService = inject(VendorService);
     store = inject(Store<any>);
     destroyRef = inject(DestroyRef);
 

@@ -5,7 +5,7 @@
     <p class="mb-3">A continuación se presenta la inducción en temas de Compliance que <b>DYNAMO PRODUCCIONES S.A.S</b>, y sus empresas subsidiarias, asociadas, y/o relacionadas, proporciona a todos sus aliados estratégicos.</p>
     <p class="mb-3">Tiene validez durante la vigencia del contrato suscrito y es un requisito fundamental para poder realizar las labores en los proyectos y áreas de Dynamo.</p>
     <p class="mb-1">A continuación encuentra el link en donde podrá el video de la inducción:</p>
-    <a href="https://dynamodevelopment.slides.com/dynamoproducciones/bento/fullscreen?token=erwCKzu_" target="_blank">VIDEO COMPLIANCE</a>
+    <a [href]="link_video_compliance$ | async" target="_blank">VIDEO COMPLIANCE</a>
 
     <form [formGroup]="parentForm" autocomplete="off">
         <div formArrayName="evaluation_compliances">
@@ -25,7 +25,7 @@
         </div>
         <div class="flex justify-content-between">
             <button (click)="navigateTo('info-form')" type="submit">ATRAS</button>
-            <button (click)="submit()" type="submit">SIGUIENTE</button>
+            <button (click)="submit()" type="submit">{{ hasSSTQuestions ? 'SIGUIENTE' : 'ENVIAR FORMULARIO'}}</button>
         </div>
     </form>
 </div>

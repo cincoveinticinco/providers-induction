@@ -4,7 +4,7 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseForm } from '../../../bases/form.base';
-import { selectDataVendorInfo } from '../../../state/selectors/vendor.selectors';
+import { selectDataVendor, selectDataVendorInfo } from '../../../state/selectors/vendor.selectors';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { loadVendor } from '../../../state/actions/vendor.actions';
 
@@ -16,6 +16,8 @@ import { loadVendor } from '../../../state/actions/vendor.actions';
   styleUrl: './info-form.component.scss'
 })
 export class InfoFormComponent extends BaseForm {
+
+  nextStep: string = '';
 
   constructor() {
     const form = new FormGroup({
@@ -34,6 +36,19 @@ export class InfoFormComponent extends BaseForm {
   ngOnInit() {
     this.store.dispatch(loadVendor());
     this.setForm();
+    this.verifyInformation();
+  }
+
+  verifyInformation() {
+    this.store.select(selectDataVendor)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(data => {
+        if (data.evaluation_compliances && data.evaluation_compliances?.length > 0) {
+          this.nextStep = 'compliance-form';
+        } else {
+          this.nextStep = 'sst-form';
+        }
+      })
   }
 
   setForm() {
@@ -57,7 +72,7 @@ export class InfoFormComponent extends BaseForm {
       this.parentForm.markAllAsTouched();
       return;
     }
-    this.router.navigate(['compliance-form']);
+    this.navigateTo(this.nextStep);
   }
 
 }
