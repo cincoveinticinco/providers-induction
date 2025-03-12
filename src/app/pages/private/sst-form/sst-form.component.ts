@@ -67,12 +67,14 @@ export class SstFormComponent extends BaseForm {
     }
   
     async submit() {
+      this.loading = true;
       if (this.parentForm.invalid) {
         this.parentForm.markAllAsTouched();
         return;
       }
       this.localStorageService.setInfo(this.parentForm.getRawValue());
       await lastValueFrom(this.vendorService.save_response_evaluation(this.localStorageService.getInfo()));
+      this.loading = false;
       this.navigateTo('thanks');
     }
 

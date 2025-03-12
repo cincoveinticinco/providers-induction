@@ -5,6 +5,7 @@ export interface DataVendor {
     evaluation_sst_yes_not?: Evaluation[];
     link_sst?:               string;
     link_compliances?:       string;
+    error?:                  string;
 }
 
 export interface Evaluation {

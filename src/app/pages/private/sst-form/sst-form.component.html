@@ -44,7 +44,7 @@
         </div>
         <div class="flex justify-content-between">
             <button (click)="navigateTo('compliance-form')" type="submit">ATRAS</button>
-            <button (click)="submit()" type="submit">ENVIAR FORMULARIO</button>
+            <button (click)="submit()" type="submit" [disabled]="loading">ENVIAR FORMULARIO</button>
         </div>
     </form>
 </div>

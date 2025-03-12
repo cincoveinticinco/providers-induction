@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LocalStorageService } from '../../services';
 
 @Component({
   selector: 'app-thanks',
-  imports: [],
   templateUrl: './thanks.component.html',
   styleUrl: './thanks.component.scss'
 })
 export class ThanksComponent {
+
+  localStorageService = inject(LocalStorageService);
+
+  ngOnInit() {
+    this.localStorageService.clear();
+  }
 
 }

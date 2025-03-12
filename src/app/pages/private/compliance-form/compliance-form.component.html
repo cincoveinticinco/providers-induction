@@ -25,7 +25,7 @@
         </div>
         <div class="flex justify-content-between">
             <button (click)="navigateTo('info-form')" type="submit">ATRAS</button>
-            <button (click)="submit()" type="submit">{{ hasSSTQuestions ? 'SIGUIENTE' : 'ENVIAR FORMULARIO'}}</button>
+            <button (click)="submit()" type="submit" [disabled]="loading">{{ hasSSTQuestions ? 'SIGUIENTE' : 'ENVIAR FORMULARIO'}}</button>
         </div>
     </form>
 </div>

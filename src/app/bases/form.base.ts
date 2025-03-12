@@ -13,6 +13,7 @@ export class BaseForm {
     vendorService = inject(VendorService);
     store = inject(Store<any>);
     destroyRef = inject(DestroyRef);
+    loading = false;
 
     constructor(form: FormGroup) {
         this.parentForm = form;

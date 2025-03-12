@@ -59,6 +59,7 @@ export class ComplianceFormComponent extends BaseForm {
   }
 
   async submit() {
+    this.loading = true;
     if (this.parentForm.invalid) {
       this.parentForm.markAllAsTouched();
       return;
@@ -71,6 +72,7 @@ export class ComplianceFormComponent extends BaseForm {
       await lastValueFrom(this.vendorService.save_response_evaluation(this.localStorageService.getInfo()));
       this.navigateTo('thanks');
     }
+    this.loading = false;
 
   }
 

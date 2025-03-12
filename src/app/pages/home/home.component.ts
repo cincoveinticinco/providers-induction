@@ -24,15 +24,18 @@ export class HomeComponent {
 
   ngOnInit() {
     this.localStorage.setToken(this.token);
+    this.store.dispatch(loadVendor());
+  }
+
+  ngAfterViewInit() {
     this.verifyInformation();
   }
 
   verifyInformation() {
-    this.store.dispatch(loadVendor());
     this.store.select(selectDataVendor)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(data => {
-        if (data.evaluation_compliances?.length === 0 && data.evaluation_sst?.length === 0 && data.evaluation_sst_yes_not?.length === 0) {
+        if (data.error) {
           this.router.navigate(['thanks'])
         }
       })
