@@ -6,7 +6,9 @@
     "start": "ng serve --port 4202",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "staging": "ng build --base-href /induction/ --configuration staging",
+    "production": "ng build --base-href /induction/ --configuration production"
   },
   "private": true,
   "dependencies": {
